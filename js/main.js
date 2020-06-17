@@ -46,37 +46,30 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	let pomodoroBreak = false;
-	function startTimer(deadline = 0) {
-		if (pomidoroCurrent > pomodoroInDay) {
-			return true;
-		} else if (pomodoroBreak) {
-			hero.style.backgroundColor = '#0fb1b1';
-			pomodoroBreak = false;
-			if (pomidoroCurrent == round) {
-				startTimer(timeBigBreak * 60);
-			} else {
-				startTimer(timeLittleBreak * 60);
-			}
-		} else {
-			// hero.style.backgroundColor = '#dd5656';
-			// startTimer(timeWork * 60);
-		}
-		intervalTimer = setInterval(() => {
+
+	function startTimer() {
+		let
+			deadline = timeWork * 60,
+			min = Math.floor(deadline / 60),
+			sec = deadline - (min * 60);
+		intervalTimer = setInterval(startWork, 1000);
+
+
+		function startWork() {
 			if (deadline == 0) {
-				if (pomodoroBreak) {
-					pomidoroCurrent++;
-					pomidoroCurrentSelector.textContent = pomidoroCurrent;
-					// pomodoroBreak = false;
-				} else {
-					pomodoroBreak = true;
-				}
-				startTimer();
-			}
-			deadline--;
-			const min = Math.floor(deadline / 60),
+				startBreak();
+			} else {
+				deadline--;
+				min = Math.floor(deadline / 60);
 				sec = deadline - (min * 60);
-			timer.textContent = `${min}:${sec}`;
-		}, 1000);
+				hero.style.backgroundColor = '#dd5656';
+				timer.textContent = `${min}:${sec}`;
+			}
+		}
+
+		function startBreak() {
+
+		}
 	}
 
 	settingsBtn.addEventListener('click', () => {
@@ -91,59 +84,59 @@ document.addEventListener('DOMContentLoaded', () => {
 		} else {
 			startBtn.textContent = 'Стоп';
 			start = true;
-			startTimer(timeWork * 60);
+			startTimer();
 		}
-	})
+	});
 
 	timeWorkDec.addEventListener('click', () => {
 		timeWork--;
 		initSettings();
-	})
+	});
 
 	timeWorkInc.addEventListener('click', () => {
 		timeWork++;
 		initSettings();
-	})
+	});
 
 	timeLittleBreakDec.addEventListener('click', () => {
 		timeLittleBreak--;
 		initSettings();
-	})
+	});
 
 	timeLittleBreakInc.addEventListener('click', () => {
 		timeLittleBreak++;
 		initSettings();
-	})
+	});
 
 	timeBigBreakDec.addEventListener('click', () => {
 		timeBigBreak--;
 		initSettings();
-	})
+	});
 
 	timeBigBreakInc.addEventListener('click', () => {
 		timeBigBreak++;
 		initSettings();
-	})
+	});
 
 	roundDec.addEventListener('click', () => {
 		round--;
 		initSettings();
-	})
+	});
 
 	roundInc.addEventListener('click', () => {
 		round++;
 		initSettings();
-	})
+	});
 
 	pomodoroInDayDec.addEventListener('click', () => {
 		pomodoroInDay--;
 		initSettings();
-	})
+	});
 
 	pomodoroInDayInc.addEventListener('click', () => {
 		pomodoroInDay++;
 		initSettings();
-	})
+	});
 
 
 
