@@ -5,15 +5,23 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Помидоковый таймер онлайн</title>
-	<link href="https://fonts.googleapis.com/css2?family=Istok+Web:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+	<!-- <link href="https://fonts.googleapis.com/css2?family=Istok+Web:ital,wght@0,700;1,400&display=swap" rel="stylesheet"> -->
 	<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+	<header class="header">
+		<div class="container">
+			<div class="header__body">
+				<h1 class="header__heading">Помидорковый таймер онлайн!</h1>
+				<button class="header__btn">Настройки</button>
+			</div>
+			<!-- /.header__body -->
+		</div>
+	</header>
 	<div class="hero">
 		<div class="container">
 			<div class="hero__body">
-				<h1 class="hero__heading">Помидорковый таймер онлайн!</h1>
 				<p class="hero__timer">24:59</p>
 				<div class="hero__count-wrapp">
 					<p class="hero__count-text">Помидорки</p>
@@ -23,11 +31,56 @@
 						<p class="hero__count-item hero__count-item--all">4</p>
 					</div>
 				</div>
+				<div class="settings">
+					<div class="settings__row">
+						<span class="settings__text">Время работы:</span>
+						<div class="settings__input-box">
+							<span class="settings__input-btn">-</span>
+							<input type="text" class="settings__input" id="timeWork">
+							<span class="settings__input-btn">+</span>
+						</div>
+					</div>
+					<div class="settings__row">
+						<span class="settings__text">Маленький перерыв:</span>
+						<div class="settings__input-box">
+							<span class="settings__input-btn">-</span>
+							<input type="text" class="settings__input" id="timeLittleBreak">
+							<span class="settings__input-btn">+</span>
+						</div>
+					</div>
+					<div class="settings__row">
+						<span class="settings__text">Большой перерыв:</span>
+						<div class="settings__input-box">
+							<span class="settings__input-btn">-</span>
+							<input type="text" class="settings__input" id="timeBigBreak">
+							<span class="settings__input-btn">+</span>
+						</div>
+					</div>
+					<div class="settings__row">
+						<span class="settings__text">Помидорок в раунде:</span>
+						<div class="settings__input-box">
+							<span class="settings__input-btn">-</span>
+							<input type="text" class="settings__input" id="round">
+							<span class="settings__input-btn">+</span>
+						</div>
+					</div>
+					<div class="settings__row">
+						<span class="settings__text">Помидорок в день:</span>
+						<div class="settings__input-box">
+							<span class="settings__input-btn">-</span>
+							<input type="text" class="settings__input" id="pomodoroInDay">
+							<span class="settings__input-btn">+</span>
+						</div>
+					</div>
+				</div>
+				<!-- /.settings -->
 			</div>
 			<!-- /.hero__body -->
 		</div>
 		<!-- /.container -->
 	</div>
+
+	<script src="js/main.js"></script>
 </body>
 
 </html>
