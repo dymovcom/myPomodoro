@@ -45,31 +45,59 @@ document.addEventListener('DOMContentLoaded', () => {
 		clearInterval(intervalTimer);
 	}
 
-	let pomodoroBreak = false;
+	let
+		deadline,
+		min,
+		sec,
+		pomodoroBreak = false;
+
+	function initTimer() {
+		if (pomidoroCurrent > pomodoroInDay) {
+			return;
+		} else {
+			if (pomodoroBreak) {
+				hero.style.backgroundColor = '#1fcfee';
+				if (pomidoroCurrent == round) {
+					deadline = timeBigBreak * 60;
+					min = Math.floor(deadline / 60);
+					sec = deadline - (min * 60);
+				} else {
+					deadline = timeLittleBreak * 60;
+					min = Math.floor(deadline / 60);
+					sec = deadline - (min * 60);
+				}
+			} else {
+				hero.style.backgroundColor = '#dd5656';
+				deadline = timeWork * 60;
+				min = Math.floor(deadline / 60);
+				sec = deadline - (min * 60);
+			}
+		}
+	}
 
 	function startTimer() {
-		let
-			deadline = timeWork * 60,
-			min = Math.floor(deadline / 60),
-			sec = deadline - (min * 60);
-		intervalTimer = setInterval(startWork, 1000);
-
-
-		function startWork() {
+		intervalTimer = setTimeout(() => {
 			if (deadline == 0) {
-				startBreak();
+				if (pomodoroBreak) {
+					pomodoroBreak = false;
+					pomidoroCurrent++;
+					if (pomidoroCurrent > pomodoroInDay) {
+						return;
+					}
+					pomidoroCurrentSelector.textContent = pomidoroCurrent;
+				} else {
+					pomodoroBreak = true;
+				}
+				initTimer();
+				startTimer();
 			} else {
 				deadline--;
 				min = Math.floor(deadline / 60);
 				sec = deadline - (min * 60);
-				hero.style.backgroundColor = '#dd5656';
 				timer.textContent = `${min}:${sec}`;
+				startTimer();
 			}
-		}
-
-		function startBreak() {
-
-		}
+		}, 1000);
 	}
 
 	settingsBtn.addEventListener('click', () => {
@@ -84,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		} else {
 			startBtn.textContent = 'Стоп';
 			start = true;
+			initTimer();
 			startTimer();
 		}
 	});
