@@ -41,8 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		pomodoroInDaySelector.value = pomodoroInDay;
 		pomidoroCurrentSelector.textContent = pomidoroCurrent;
 		pomidoroAllSelector.textContent = pomodoroInDay;
-		timer.textContent = `${timeWork}:00`;
+		if (timeWork < 10) {
+			timer.textContent = `${'0' + timeWork}:00`;
+		} else {
+			timer.textContent = `${timeWork}:00`;
+		}
 		clearInterval(intervalTimer);
+		pomodoroBreak = false;
+		hero.style.backgroundColor = '#dd5656';
 	}
 
 	let
@@ -50,6 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		min,
 		sec,
 		pomodoroBreak = false;
+
+	function getZero(num) {
+		if (num >= 0 && num < 10) {
+			return `0${num}`;
+		} else {
+			return num;
+		}
+	}
 
 	function initTimer() {
 		if (pomidoroCurrent > pomodoroInDay) {
@@ -73,10 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				sec = deadline - (min * 60);
 			}
 		}
+		timer.textContent = `${getZero(min)}:${getZero(sec)}`;
 	}
 
 	function startTimer() {
-		intervalTimer = setTimeout(() => {
+		intervalTimer = setTimeout(updateTimer, 1000);
+		function updateTimer() {
 			if (deadline == 0) {
 				if (pomodoroBreak) {
 					pomodoroBreak = false;
@@ -94,10 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
 				deadline--;
 				min = Math.floor(deadline / 60);
 				sec = deadline - (min * 60);
-				timer.textContent = `${min}:${sec}`;
+				timer.textContent = `${getZero(min)}:${getZero(sec)}`;
 				startTimer();
 			}
-		}, 1000);
+		}
 	}
 
 	settingsBtn.addEventListener('click', () => {
