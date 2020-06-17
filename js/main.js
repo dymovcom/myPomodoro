@@ -117,9 +117,26 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
+	function detectedError(selector) {
+		selector.style.border = '1px solid #ff0000';
+	}
+
+	timeWorkSelector.addEventListener('change', () => {
+		if (+timeWorkSelector.value >= 1) {
+			timeWork = +timeWorkSelector.value;
+			initSettings();
+		} else {
+			detectedError(timeWorkSelector);
+		}
+	});
+
 	timeWorkDec.addEventListener('click', () => {
-		timeWork--;
-		initSettings();
+		if ((timeWork - 1) >= 1) {
+			timeWork--;
+			initSettings();
+		} else {
+			detectedError(timeWorkSelector);
+		}
 	});
 
 	timeWorkInc.addEventListener('click', () => {
@@ -127,9 +144,22 @@ document.addEventListener('DOMContentLoaded', () => {
 		initSettings();
 	});
 
+	timeLittleBreakSelector.addEventListener('change', () => {
+		if (+timeLittleBreakSelector.value >= 1) {
+			timeLittleBreak = +timeLittleBreakSelector.value;
+			initSettings();
+		} else {
+			detectedError(timeLittleBreakSelector);
+		}
+	});
+
 	timeLittleBreakDec.addEventListener('click', () => {
-		timeLittleBreak--;
-		initSettings();
+		if ((timeLittleBreak - 1) >= 1) {
+			timeLittleBreak--;
+			initSettings();
+		} else {
+			detectedError(timeLittleBreakSelector);
+		}
 	});
 
 	timeLittleBreakInc.addEventListener('click', () => {
@@ -137,9 +167,22 @@ document.addEventListener('DOMContentLoaded', () => {
 		initSettings();
 	});
 
+	timeBigBreakSelector.addEventListener('change', () => {
+		if (+timeBigBreakSelector.value >= 1) {
+			timeBigBreak = +timeBigBreakSelector.value;
+			initSettings();
+		} else {
+			detectedError(timeBigBreakSelector);
+		}
+	});
+
 	timeBigBreakDec.addEventListener('click', () => {
-		timeBigBreak--;
-		initSettings();
+		if ((timeBigBreak - 1) >= 1) {
+			timeBigBreak--;
+			initSettings();
+		} else {
+			detectedError(timeBigBreakSelector);
+		}
 	});
 
 	timeBigBreakInc.addEventListener('click', () => {
@@ -147,27 +190,55 @@ document.addEventListener('DOMContentLoaded', () => {
 		initSettings();
 	});
 
+	roundSelector.addEventListener('change', () => {
+		if (+roundSelector.value >= 1) {
+			round = +roundSelector.value;
+			initSettings();
+		} else {
+			detectedError(roundSelector);
+		}
+	});
+
 	roundDec.addEventListener('click', () => {
-		round--;
-		initSettings();
+		if ((round - 1) >= 1) {
+			round--;
+			initSettings();
+		} else {
+			detectedError(roundSelector);
+		}
 	});
 
 	roundInc.addEventListener('click', () => {
-		round++;
-		initSettings();
+		if ((round + 1) <= pomodoroInDay) {
+			round++;
+			initSettings();
+		} else {
+			detectedError(roundSelector);
+		}
+	});
+
+	pomodoroInDaySelector.addEventListener('change', () => {
+		if (+pomodoroInDaySelector.value >= round) {
+			pomodoroInDay = +pomodoroInDaySelector.value;
+			initSettings();
+		} else {
+			detectedError(pomodoroInDaySelector);
+		}
 	});
 
 	pomodoroInDayDec.addEventListener('click', () => {
-		pomodoroInDay--;
-		initSettings();
+		if ((pomodoroInDay - 1) >= round) {
+			pomodoroInDay--;
+			initSettings();
+		} else {
+			detectedError(pomodoroInDaySelector);
+		}
 	});
 
 	pomodoroInDayInc.addEventListener('click', () => {
 		pomodoroInDay++;
 		initSettings();
 	});
-
-
 
 	initSettings();
 });
