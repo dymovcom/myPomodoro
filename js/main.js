@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			return;
 		} else if (pomodoroBreak) {
 			hero.style.backgroundColor = '#0fb1b1';
-			if (pomidoroCurrent === round) {
+			if (pomidoroCurrent == round) {
 				startTimer(timeBigBreak * 60);
 			} else {
 				startTimer(timeLittleBreak * 60);
@@ -63,6 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		intervalTimer = setInterval(() => {
 			if (deadline == 0) {
 				if (pomodoroBreak) {
+					pomidoroCurrent++;
+					pomidoroCurrentSelector.textContent = pomidoroCurrent;
 					pomodoroBreak = false;
 				} else {
 					pomodoroBreak = true;
